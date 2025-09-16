@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Dashboard from "./page/dashboard";
 import Detail from "./page/detail";
+import AlarmSummary from "./page/sum_alm";
 import { generateMockData, filterData, calculateStats } from "./services/mockData";
 
 const App = ({ activeTab }) => {
@@ -144,15 +145,10 @@ const App = ({ activeTab }) => {
         </div>
       )}
       {activeTab === "สรุป Alarm" && (
-        <div>
-          <h2>📊 Alarm Summary</h2>
-          <p>Alarm statistics and trends will go here.</p>
-        </div>
+        <AlarmSummary data={filteredLogs} />
       )}
       {activeTab === "รายละเอียด" && (
-        <div>
-          <Detail data={filteredLogs} />
-        </div>
+        <Detail data={filteredLogs} />
       )}
     </div>
   );

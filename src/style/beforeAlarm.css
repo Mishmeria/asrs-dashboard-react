@@ -1,0 +1,52 @@
+.before-alarm-container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.pagination-controls {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.before-alarm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.before-alarm-table th,
+.before-alarm-table td {
+  border: 1px solid #ddd;
+  padding: 6px;
+  text-align: center;
+}
+
+.before-alarm-table th {
+  background: #f2f2f2;
+  font-weight: 600;
+}
+
+.before-alarm-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.before-alarm-table tr:hover {
+  background: #fbe9e7;
+}
+
+.alarm-code {
+  color: #d84315;
+  font-weight: 600;
+}
+
+.duration {
+  color: #1565c0;
+  font-weight: 600;
+}
