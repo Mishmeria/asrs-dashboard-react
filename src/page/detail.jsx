@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Dropdown from "../components/dropdown";
-import DatePicker from "../components/DatePicker";
 import Button from "../components/button";
 import "../style/detail.css";
 
@@ -9,13 +7,8 @@ const Detail = ({ data = [] }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const rowsPerPage = 20;
 
-  // Filter state
+  // Filter state for search only (other filters are handled by the global filter)
   const [filteredData, setFilteredData] = useState(data);
-  const [srm, setSrm] = useState("All");
-  const [msgType, setMsgType] = useState("All");
-  const [plcCode, setPlcCode] = useState("All");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   // Update filtered data when props data changes
@@ -24,39 +17,9 @@ const Detail = ({ data = [] }) => {
     setCurrentPage(0); // Reset to first page when data changes
   }, [data]);
 
-  // Apply filters when filter state changes
+  // Apply search filter
   useEffect(() => {
     let result = [...data];
-
-    // Filter by SRM
-    if (srm !== "All") {
-      result = result.filter(item => String(item.ASRS) === String(srm));
-    }
-
-    // Filter by MSGTYPE
-    if (msgType !== "All") {
-      result = result.filter(item => item.MSGTYPE === msgType);
-    }
-
-    // Filter by PLCCODE
-    if (plcCode !== "All") {
-      result = result.filter(item => String(item.PLCCODE) === String(plcCode));
-    }
-
-    // Filter by date range
-    if (startDate && endDate) {
-      result = result.filter(item => {
-        const rowDate = new Date(item.CDATE);
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        
-        // Set time to beginning/end of day for proper comparison
-        start.setHours(0, 0, 0, 0);
-        end.setHours(23, 59, 59, 999);
-        
-        return rowDate >= start && rowDate <= end;
-      });
-    }
 
     // Filter by search term (in message text)
     if (searchTerm) {
@@ -68,28 +31,11 @@ const Detail = ({ data = [] }) => {
 
     setFilteredData(result);
     setCurrentPage(0); // Reset to first page when filters change
-  }, [srm, msgType, plcCode, startDate, endDate, searchTerm, data]);
+  }, [searchTerm, data]);
 
-  // Clear filters
-  const handleClearFilters = () => {
-    setSrm("All");
-    setMsgType("All");
-    setPlcCode("All");
-    setStartDate("");
-    setEndDate("");
+  // Clear search
+  const handleClearSearch = () => {
     setSearchTerm("");
-  };
-
-  // Get unique SRM values for dropdown
-  const getSrmOptions = () => {
-    const uniqueSrms = [...new Set(data.map(item => item.ASRS))].sort();
-    return ["All", ...uniqueSrms.map(String)];
-  };
-
-  // Get unique PLCCODE values for dropdown
-  const getPlcCodeOptions = () => {
-    const uniquePlcCodes = [...new Set(data.map(item => item.PLCCODE))].sort((a, b) => a - b);
-    return ["All", ...uniquePlcCodes.map(String)];
   };
 
   // Pagination logic
@@ -111,55 +57,24 @@ const Detail = ({ data = [] }) => {
     <div className="detail-container">
       <h2>📜 รายละเอียด (Detail Logs)</h2>
 
-      {/* Filter Section */}
-      <div className="detail-filters">
-        <div className="filter-row">
-          <div className="filter-group">
-            <Dropdown
-              label="SRM"
-              value={srm}
-              options={getSrmOptions()}
-              onChange={setSrm}
-            />
-            <Dropdown
-              label="MSGTYPE"
-              value={msgType}
-              options={["All", "Normal", "Alarm"]}
-              onChange={setMsgType}
-            />
-            <Dropdown
-              label="PLCCODE"
-              value={plcCode}
-              options={getPlcCodeOptions()}
-              onChange={setPlcCode}
-            />
-          </div>
-
-          <div className="filter-group">
-            <DatePicker label="Start Date" value={startDate} onChange={setStartDate} />
-            <DatePicker label="End Date" value={endDate} onChange={setEndDate} />
-          </div>
-
-          <div className="filter-group">
-            <div className="search-box">
-              <input
-                type="text"
-                placeholder="Search in messages..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-              />
-              {searchTerm && (
-                <button 
-                  className="clear-search" 
-                  onClick={() => setSearchTerm("")}
-                >
-                  ×
-                </button>
-              )}
-            </div>
-            <Button text="Clear Filters" bgColor="orange" onClick={handleClearFilters} />
-          </div>
+      {/* Search Box Only */}
+      <div className="detail-search">
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="Search in messages..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          {searchTerm && (
+            <button 
+              className="clear-search" 
+              onClick={handleClearSearch}
+            >
+              ×
+            </button>
+          )}
         </div>
       </div>
 

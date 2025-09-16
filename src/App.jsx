@@ -4,6 +4,7 @@ import Detail from "./page/detail";
 import AlarmSummary from "./page/sum_alm";
 import BeforeAlarm from "./page/almAnalys";
 import { generateMockData, filterData, calculateStats } from "./services/mockData";
+import FilterControls from "./components/filter";
 
 const App = ({ activeTab }) => {
   // Shared state for data across tabs
@@ -131,12 +132,28 @@ const App = ({ activeTab }) => {
     stats
   };
 
+  // Get dynamic PLCCODE options based on current data
+  const getPlcCodeOptions = () => {
+    const uniqueCodes = [...new Set(allLogs.map(item => item.PLCCODE))].sort((a, b) => a - b);
+    return ["All", ...uniqueCodes.map(String)];
+  };
+
+  // Update filter props with dynamic options
+  const enhancedFilterProps = {
+    ...filterProps,
+    plcCodeOptions: getPlcCodeOptions()
+  };
+
   return (
     <div className="App">
+      {/* Common Filter Controls for all tabs */}
+      <div className="global-filter-container">
+        <FilterControls {...enhancedFilterProps} />
+      </div>
+
       {activeTab === "กราฟ" && (
         <Dashboard 
           filteredLogs={filteredLogs} 
-          filterProps={filterProps} 
         />
       )}
       {activeTab === "ก่อนเกิด Alarm" && (

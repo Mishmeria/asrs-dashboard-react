@@ -1,13 +1,9 @@
 import React from "react";
-import FilterControls from "../components/filter";
 import LogsChart from "../page/charts";
 
-const Dashboard = ({ filteredLogs, filterProps }) => {
+const Dashboard = ({ filteredLogs }) => {
   return (
     <div>
-      {/* Filter Section */}
-      <FilterControls {...filterProps} />
-
       {/* Chart Section */}
       <div style={{ marginTop: 20 }}>
         {filteredLogs.length > 0 ? (
