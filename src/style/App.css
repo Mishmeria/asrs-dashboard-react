@@ -139,6 +139,11 @@ button.green {
   color: white;
 }
 
+button.blue {
+  background: #3498db;
+  color: white;
+}
+
 /* Summary cards */
 .summary-cards {
   display: flex;
@@ -178,4 +183,129 @@ button.green {
   justify-content: center;
   color: #aaa;
   font-size: 1rem;
+}
+
+/* DatePicker styles */
+.date-picker-container {
+  position: relative;
+  display: inline-block;
+}
+
+.date-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.date-display:hover {
+  border-color: #e67e22;
+}
+
+.calendar-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.calendar-popup {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 1000;
+  width: 280px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-header button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+
+.calendar-header button:hover {
+  color: #e67e22;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 5px;
+}
+
+.calendar-weekdays div {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+  padding: 5px 0;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-day {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.calendar-day:hover {
+  background-color: #f5f5f5;
+}
+
+.calendar-day.selected {
+  background-color: #e67e22;
+  color: white;
+  font-weight: bold;
+}
+
+.calendar-day.empty {
+  cursor: default;
+}
+
+.calendar-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.today-button {
+  background: #f0f0f0;
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.today-button:hover {
+  background: #e0e0e0;
 }

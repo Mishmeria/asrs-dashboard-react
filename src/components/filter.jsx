@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from "./dropdown";
 import Button from "./button";
-import DateChip from "./date_selc";
+import DatePicker from "./DatePicker";
 import StatusProgress from "./bar";
 
 const FilterControls = ({
@@ -15,7 +15,7 @@ const FilterControls = ({
   setStartDate,
   endDate,
   setEndDate,
-  onSearch,
+  onDateApply,
   onExport,
   onClear,
   stats,
@@ -53,9 +53,9 @@ const FilterControls = ({
 
         {/* Center */}
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-          <DateChip label="Start" value={startDate} onClick={() => setStartDate(new Date())} />
-          <DateChip label="End" value={endDate} onClick={() => setEndDate(new Date())} />
-          <Button text="Apply" bgColor="orange" onClick={onSearch} />
+          <DatePicker label="Start" value={startDate} onChange={setStartDate} />
+          <DatePicker label="End" value={endDate} onChange={setEndDate} />
+          <Button text="Apply Date" bgColor="orange" onClick={onDateApply} />
         </div>
 
         {/* Right */}
