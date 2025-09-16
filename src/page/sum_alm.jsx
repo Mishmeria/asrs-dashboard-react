@@ -66,13 +66,7 @@ const AlarmSummary = ({ data = [] }) => {
 
   return (
     <div className="alarm-summary-container">
-      <h2>📊 สถิติการเกิด Alarm</h2>
-      
-      <div className="alarm-summary-info">
-        <span className="filter-count">
-          {filteredData.length} of {totalAlarmCount} alarm records
-        </span>
-      </div>
+      <h2>📊 สถิติการเกิด Alarm </h2>
       
       {data.length === 0 ? (
         <div className="no-data-message">
