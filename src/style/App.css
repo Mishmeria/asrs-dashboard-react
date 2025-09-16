@@ -309,3 +309,34 @@ button.blue {
 .today-button:hover {
   background: #e0e0e0;
 }
+
+/* View Toggle Styles */
+.view-toggle {
+  display: flex;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.view-toggle-btn {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-toggle-btn:hover {
+  color: #333;
+}
+
+.view-toggle-btn.active {
+  background: #e67e22;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
