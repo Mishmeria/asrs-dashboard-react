@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Dashboard from "./page/dashboard";
 import Detail from "./page/detail";
 import AlarmSummary from "./page/sum_alm";
+import BeforeAlarm from "./page/almAnalys";
 import { generateMockData, filterData, calculateStats } from "./services/mockData";
 
 const App = ({ activeTab }) => {
@@ -139,10 +140,7 @@ const App = ({ activeTab }) => {
         />
       )}
       {activeTab === "ก่อนเกิด Alarm" && (
-        <div>
-          <h2>⚠️ Before Alarm Analysis</h2>
-          <p>Content for alarm prediction and prevention will go here.</p>
-        </div>
+        <BeforeAlarm data={allLogs} />
       )}
       {activeTab === "สรุป Alarm" && (
         <AlarmSummary data={filteredLogs} />
