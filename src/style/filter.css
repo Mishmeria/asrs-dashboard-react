@@ -1,3 +1,4 @@
+/* ===== MAIN CONTAINER ===== */
 .global-filter-container {
   background-color: white;
   padding: 15px 20px;
@@ -12,122 +13,338 @@
 
 .filter-controls-row {
   display: flex;
+  align-items: flex-end;
+  gap: 15px;
   flex-wrap: wrap;
-  gap: 10px;
   margin-bottom: 10px;
-  align-items: center;
 }
 
+/* ===== FILTER GROUPS ===== */
 .filter-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: flex-start;
+  min-width: 120px;
 }
 
 .filter-label {
-  font-size: 0.8rem;
-  color: #555;
+  font-size: 14px;
   font-weight: 500;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
+  color: #333;
 }
 
+/* ===== DROPDOWN SELECTS ===== */
 .filter-select {
-  padding: 8px 10px;
+  height: 38px;
+  padding: 8px 12px;
+  padding-right: 35px; /* Make room for custom arrow */
   border: 1px solid #ddd;
   border-radius: 4px;
-  min-width: 180px;
-  font-size: 0.9rem;
-  background-color: white;
+  font-size: 14px;
+  background: white;
+  box-sizing: border-box;
+  min-width: 120px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none; /* Remove default dropdown arrow */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e67e22' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
 }
 
+.filter-select:hover {
+  border-color: #e67e22;
+  box-shadow: 0 2px 4px rgba(230, 126, 34, 0.2);
+  transform: translateY(-1px);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #e67e22;
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+}
+
+.filter-select:active {
+  transform: translateY(0);
+}
+
+/* ===== DATE PICKER ===== */
 .filter-date-group {
   display: flex;
-  gap: 10px;
   align-items: flex-end;
+  gap: 10px;
 }
 
-.date-input-container {
+.date-picker-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: flex-start;
 }
 
-.date-input {
-  padding: 8px 10px;
-  padding-right: 30px; /* Space for calendar icon */
+.date-picker-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.date-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
   min-width: 140px;
-  font-size: 0.9rem;
+  height: 38px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
-.calendar-icon {
+.date-display:hover {
+  border-color: #e67e22;
+  box-shadow: 0 2px 4px rgba(230, 126, 34, 0.2);
+  transform: translateY(-1px);
+}
+
+.calendar-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 16px;
+  padding: 2px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.calendar-button:hover {
+  background: rgba(230, 126, 34, 0.1);
+  transform: scale(1.1);
+}
+
+/* ===== CALENDAR POPUP ===== */
+.calendar-popup {
   position: absolute;
-  right: 10px;
-  bottom: 9px;
-  color: #777;
-  pointer-events: none;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 280px;
+  padding: 16px;
+  margin-top: 4px;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  animation: popupAppear 0.2s ease forwards;
 }
 
-.apply-date-btn {
-  background-color: #e67e22;
+@keyframes popupAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.calendar-header button {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  min-width: 32px;
+}
+
+.calendar-header button:hover {
+  background: #e67e22;
+  color: white;
+  border-color: #e67e22;
+  transform: translateY(-1px);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays div {
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: #666;
+  padding: 4px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.calendar-day {
+  text-align: center;
+  padding: 8px 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.calendar-day:hover {
+  background: #fdf2e9;
+  transform: scale(1.05);
+}
+
+.calendar-day.selected {
+  background: #e67e22;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+}
+
+.calendar-day.empty {
+  cursor: default;
+}
+
+.calendar-day.empty:hover {
+  background: transparent;
+  transform: none;
+}
+
+.calendar-footer {
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.today-button {
+  background: #e67e22;
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 8px 15px;
+  padding: 8px 16px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  height: 36px;
+  font-size: 14px;
+  transition: all 0.2s ease;
 }
 
-.apply-date-btn:hover {
-  background-color: #d35400;
+.today-button:hover {
+  background: #d35400;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(230, 126, 34, 0.2);
 }
 
+/* ===== ACTION BUTTONS ===== */
 .filter-action-group {
   display: flex;
+  align-items: flex-end;
   gap: 10px;
   margin-left: auto;
 }
 
-.export-btn {
-  background-color: #27ae60;
+.apply-date-btn {
+  background: #e67e22;
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 8px 15px;
+  padding: 8px 16px;
   cursor: pointer;
+  font-size: 14px;
+  height: 38px;
   font-weight: 500;
-  font-size: 0.9rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.apply-date-btn:hover {
+  background: #d35400;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(230, 126, 34, 0.2);
+}
+
+.apply-date-btn:active {
+  transform: translateY(0);
+}
+
+.export-btn {
+  background: #0b8107;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 38px;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 .export-btn:hover {
-  background-color: #219653;
+  background: #e67e22;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(243, 156, 18, 0.2);
+}
+
+.export-btn:active {
+  transform: translateY(0);
 }
 
 .clear-filter-btn {
-  background-color: #e67e22;
+  background: #e74c3c;
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 8px 15px;
+  padding: 8px 16px;
   cursor: pointer;
+  font-size: 14px;
+  height: 38px;
   font-weight: 500;
-  font-size: 0.9rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 .clear-filter-btn:hover {
-  background-color: #d35400;
+  background: #c0392b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
 }
 
-/* Progress bar */
+.clear-filter-btn:active {
+  transform: translateY(0);
+}
+
+/* ===== PROGRESS BAR ===== */
 .status-progress-container {
   margin-top: 15px;
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .status-progress-bar {
@@ -136,25 +353,91 @@
   border-radius: 10px;
   overflow: hidden;
   background-color: #f1f1f1;
+  min-width: 200px;
 }
 
 .status-progress-normal {
   height: 100%;
-  background-color: #6ab04c;
+  background: linear-gradient(90deg,#00ff0d );
   float: left;
+  transition: width 0.3s ease;
 }
 
 .status-progress-alarm {
   height: 100%;
-  background-color: #eb4d4b;
+  background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
   float: left;
+  transition: width 0.3s ease;
 }
 
 .status-progress-text {
   font-size: 0.85rem;
   color: #444;
+  white-space: nowrap;
 }
 
 .status-label {
-  font-weight: 500;
+  font-weight: 600;
+  color: #e67e22;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .filter-controls-row {
+    gap: 10px;
+  }
+  
+  .filter-group,
+  .date-picker-wrapper {
+    min-width: 100px;
+  }
+  
+  .filter-select,
+  .date-display {
+    min-width: 100px;
+    font-size: 13px;
+  }
+  
+  .filter-action-group {
+    margin-left: 0;
+    width: 100%;
+    justify-content: stretch;
+  }
+  
+  .export-btn,
+  .clear-filter-btn,
+  .apply-date-btn {
+    flex: 1;
+    min-width: auto;
+  }
+  
+  .status-progress-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .status-progress-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .global-filter-container {
+    padding: 10px 15px;
+  }
+  
+  .filter-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-group,
+  .date-picker-wrapper {
+    width: 100%;
+  }
+  
+  .filter-select,
+  .date-display {
+    width: 100%;
+  }
 }

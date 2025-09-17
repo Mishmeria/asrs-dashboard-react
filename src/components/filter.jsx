@@ -1,4 +1,5 @@
 import React from "react";
+import DatePicker from "./DatePicker"; // Import your DatePicker component
 import "../style/filter.css";
 
 const FilterControls = ({
@@ -64,30 +65,24 @@ const FilterControls = ({
           </select>
         </div>
 
-        {/* Date Range */}
+        {/* Date Range with DatePicker Components */}
         <div className="filter-date-group">
-          <div className="date-input-container">
-            <div className="filter-label">Start:</div>
-            <input
-              type="text"
+          <div className="date-picker-wrapper">
+            <div className="filter-label">Start Date</div>
+            <DatePicker
+              label=""
               value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className="date-input"
-              placeholder="YYYY-MM-DD"
+              onChange={setStartDate}
             />
-            <span className="calendar-icon">📅</span>
           </div>
 
-          <div className="date-input-container">
-            <div className="filter-label">End:</div>
-            <input
-              type="text"
+          <div className="date-picker-wrapper">
+            <div className="filter-label">End Date</div>
+            <DatePicker
+              label=""
               value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="date-input"
-              placeholder="YYYY-MM-DD"
+              onChange={setEndDate}
             />
-            <span className="calendar-icon">📅</span>
           </div>
 
           <button className="apply-date-btn" onClick={onDateApply}>

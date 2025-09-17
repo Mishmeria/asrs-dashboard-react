@@ -103,7 +103,7 @@ const DatePicker = ({ label, value, onChange }) => {
   return (
     <div className="date-picker-container">
       <div className="date-display" onClick={() => setShowCalendar(!showCalendar)}>
-        <span>{label}: {value || "Select"}</span>
+        <span>{value || "Select Date"}</span>
         <button className="calendar-button">📅</button>
       </div>
       
